@@ -35,13 +35,15 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     def like_post(self):
-        return self.post.rating_post + 1
+        self.rating_post += 1
+        self.save()
 
     def Dislike_post(self):
-        return self.rating_post - 1
+        self.rating_post -= 1
+        self.save()
 
-    # def preview(self):
-    #   return  self.post_text(f" {self.post_text.[0:124]}...")
+    def preview(self):
+        return f"{self.post_text[0:124]}..."
 
 
 class Post_Category(models.Model):
@@ -60,7 +62,9 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def like_comment(self):
-        return self.rating_comment + 1
+        self.rating_comment += 1
+        self.save()
 
     def Dislike_comment(self):
-        return self.rating_comment - 1
+        self.rating_comment -= 1
+        self.save()

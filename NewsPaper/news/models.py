@@ -34,9 +34,16 @@ class Post(models.Model):
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
-    def like_post(self):
-        self.rating_post += 1
-        self.save()
+    def __str__(self):
+        return self.post_name
+
+    def get_like_post(self):
+        return self.rating_post
+
+    def set_like_post(self, rating_post):
+        rating_post =+ 1
+        return rating_post
+
 
     def Dislike_post(self):
         self.rating_post -= 1
